@@ -243,15 +243,11 @@ contract LUNARToken is ERC20, Ownable {
         _beforeTokenTransfer(account, address(0), amount);
 
         uint256 tAccountBalance = _tOwned[account];
-        uint256 rAccountBalance = _rOwned[account];
         require(tAccountBalance >= amount, "ERC20: burn amount exceeds balance");
-        require(rAccountBalance >= amount, "ERC20: burn amount exceeds balance");
         unchecked {
             _tOwned[account] = tAccountBalance - amount;
-            _rOwned[account] = rAccountBalance - amount;
         }
         _tTotal -= amount;
-        _rTotal -= amount;
 
         emit Transfer(account, address(0), amount);
 
